@@ -10,11 +10,13 @@ If a requirement is deleted, the `RID` is not re-used.
 
 ## Race System
 
+| RID | Text |
 | --- | --- |
 | RID1 | The Plugin shall provide the capability for a player to be a race from the list: Human Elf Dwarf Gnome TBD |
 
 ## Class System
 
+| RID | Text |
 | --- | --- |
 | RID2 | The Plugin shall provide the capability for a player to be a base class. |
 | RID3 | THe Plugin shall provide the capability for a player to be a sub-class. |
@@ -24,6 +26,7 @@ If a requirement is deleted, the `RID` is not re-used.
 
 ## Base Classes and Sub Classes
 
+| RID | Text |
 | --- | --- |
 | RID7 | The Plugin shall provide the capability for a player to be a base class from the list Fighter Magic User Rogue TBD |
 | RID8 | The Plugin shall provide the capability for a player to be a sub class of Fighter from the list Paladin TBD |
@@ -33,11 +36,13 @@ If a requirement is deleted, the `RID` is not re-used.
 
 ## Capabilities of Races
 
+| RID | Text |
 | --- | --- |
 | RID11 | The Plugin shall provide the capability to define capabilities which are defined by: Name, Description, Allowed Class(es), Allowed Race(s), Allowed World(s), An Action event, A Re-action event| 
 
 ### Capabilities
 
+| RID | Text |
 | --- | --- |
 | RID12 | The Plugin shall provide the capability to define a Capability. |
 | RID13 | THe Plugin shall provide the capability to persist a capability in a datastore. |
@@ -45,6 +50,7 @@ If a requirement is deleted, the `RID` is not re-used.
 
 #### Language Capabilities
 
+| RID | Text |
 | --- | --- |
 | RID15 | THe Plugin shall provide the capability to cause players to speak in a language defined by their Race. |
 | RID16 | The Plugin shall provide the capability to cause players to decyper (interpret) a language. |
@@ -53,6 +59,7 @@ If a requirement is deleted, the `RID` is not re-used.
 
 ####  Spell Capabilities
 
+| RID | Text |
 | --- | --- |
 | RID19 | The Plugin shall provide the capability to have magic spells with parameters: Name , Description , Proficiency , Random Outcome , Designed Outcome , Quantity , Impact on self-Player Parameters (eg., Health) , Impact on World (TBD) |
 | RID20 | The Plugin shall provide the capability to define a magic spell. |
@@ -66,6 +73,7 @@ can be re-learned. |
 
 #### Weapon Capabilities
 
+| RID | Text |
 | --- | --- |
 | RID26 | The Plugin shall provide the capability to have Weapon Capabilities with parameters: Name Description , Effect on weapon usage , Effect on Damage inflicted , Impact on self-Player Parameters (eg., Health, Stamina) , Impact on World (TBD - Block breaking, or TBD) , Curse effect  (negative Enchantment), Enchantment (positive Enchantment) |
 | RID27 | The Plugin shall provide the capability to cause player to learn a weapon capability. |
@@ -76,6 +84,7 @@ can be re-learned. |
 
 #### Talent Proficiency Capabilities
 
+| RID | Text |
 | --- | ---
 | RID32 | The Plugin shall provide the capability to have Talent Capabilities with parameters: Name , Description , Effect on movement , Effect on Language use , Effect on modifying the world (eg., breaking blocks, placing blocks, etc.. TBD) , Effect on Player Class parameters , Effect on Player Capabilities (Weapon, Spell, or Language, TBD) |
 
