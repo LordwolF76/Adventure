@@ -4,179 +4,164 @@ The implementation of the Plugin is defined by these requirements.
 
 Requirements are uniquely identified by a `RID` (Requirement ID)
 
-A requirement retains it's `RID`.  If a Requirement is changed, the `RID` must change.
+A requirement retains it's `RID`.  If a Requirement is changed to the point
+where the intent of the requirement is different, the `RID` must change.  
 If a requirement is deleted, the `RID` is not re-used.
 
 ## Race System
 
-RID_1.  The Plugin shall provide the capability for a player to be a race from the list
+--- | ---
+RID_1 | The Plugin shall provide the capability for a player to be a race from the list
 
-..1 Human
-..2 Elf
-..3 Dwarf
-..4 Gnome
-..5 TBD
+ | Human
+ | Elf
+ | Dwarf
+ | Gnome
+ | TBD
 
 ## Class System
 
-RID_2. The Plugin shall provide the capability for a player to be a base class.
+--- | ---
+RID_2 | The Plugin shall provide the capability for a player to be a base class.
 
-RID_3. THe Plugin shall provide the capability for a player to be a sub-class.
+RID_3 | THe Plugin shall provide the capability for a player to be a sub-class.
 
-RID_4. The Plugin shall provide the capability to permit defined sub-classes within a base class.
+RID_4 | The Plugin shall provide the capability to permit defined sub-classes within a base class.
 
-RID_5. The Plugin shall provide the capability to permit a player to be a base class based on the 
+RID_5 | The Plugin shall provide the capability to permit a player to be a base class based on the  race of the player.
 
-race of the player.
-RID_6. THe Plugin shall provide the capaibility to permit a defined race to be compatible
+RID_6 | THe Plugin shall provide the capaibility to permit a defined race to be compatible
 
 with a defined base class.
 
 ## Base Classes and Sub Classes
 
-RID_7. The Plugin shall provide the capability for a player to be a base class from the list
+RID_7 | The Plugin shall provide the capability for a player to be a base class from the list
 
-..1 Fighter
-..2 Magic User
-..3 Rogue
-..4 TBD
+ | Fighter
+ | Magic User
+ | Rogue
+ | TBD
+RID_8 | The Plugin shall provide the capability for a player to be a sub class of Fighter from the list
 
-RID_8. The Plugin shall provide the capability for a player to be a sub class of Fighter from the
+ | Paladin
+ | TBD
+RID_9 | The Plugin shall provide the capability for player to be a sub class of Magic User from the list
 
-list
-..1 Paladin
-..2 TBD
+ | Cleric
+ | Illusionist
+ |  Mage
+ | Wizard
+RID_10 | The Plugin shall provide the capability for a player to be a sub class of Rogue from the list
 
-RID_9. The Plugin shall provide the capability for player to be a sub class of Magic User from 
+ | Bard
+ | Assassin
+ | Thief
+ | Rogue
 
-the list
-..1 Cleric
-..2 Illusionist
-..3 Mage
-..4 Wizard
-
-RID_10. The Plugin shall provide the capability for a player to be a sub class of Rogue from
-
-the list
-..1 Bard
-..2 Assassin
-..3 Thief
-..4 Rogue
 
 ## Capabilities of Races
 
-RID_11. The Plugin shall provide the capability to define capabilities which are defined
+--- | ---
+RID_11 | The Plugin shall provide the capability to define capabilities which are defined by:
 
-by:
-..* Name
-..* Description
-..* Allowed Class(es)
-..* Allowed Race(s)
-..* Allowed World(s)
-..* An Action event
-..* A Re-action event
-
+ | Name
+ | Description
+ | Allowed Class(es)
+ | Allowed Race(s)
+ | Allowed World(s)
+ | An Action event
+ | A Re-action event
 
 ### Capabilities
 
-RID_12.  The Plugin shall provide the capability to define a Capability.
+--- | ---
+RID_12 | The Plugin shall provide the capability to define a Capability.
 
-RID_13.  THe Plugin shall provide the capability to persist a capability in a datastore.
+RID_13 | THe Plugin shall provide the capability to persist a capability in a datastore.
 
-RID_14.  The Plugin shall provide the capability to query a player for his/her capabilities.
-
+RID_14 | The Plugin shall provide the capability to query a player for his/her capabilities.
 
 
 #### Language Capabilities
 
-RID_15.  THe Plugin shall provide the capability to cause players to speak in a language defined
+--- | ---
+RID_15 | THe Plugin shall provide the capability to cause players to speak in a language defined by their Race.
 
-by their Race.
-RID_16.  The Plugin shall provide the capability to cause players to decyper (interpret)
+RID_16 | The Plugin shall provide the capability to cause players to decyper (interpret) a language.
 
-a language.
-RID_17.  The Plugin shall provide the capability to allow player to learn a new Language 
+RID_17 | The Plugin shall provide the capability to allow player to learn a new Language subject to criteria.
 
-subject to criteria.
-RID_18. THe Plugin shall provide the capability to override the language barrier between
+RID_18 |THe Plugin shall provide the capability to override the language barrier between two different Races.
 
-two different Races.
 
 ####  Spell Capabilities
 
-RID_19.  THe Plugin shall provide the capability to have magic spells with parameters:
+--- | ---
+RID_19 | THe Plugin shall provide the capability to have magic spells with parameters:
 
-..* Name
-..* Description
-..* Proficiency
-..* Random Outcome
-..* Designed Outcome
-..* Quantity
-..* Impact on self-Player Parameters (eg., Health)
-..* Impact on World (TBD)
+ | Name
+ | Description
+ | Proficiency
+ | Random Outcome
+ | Designed Outcome
+ | Quantity
+ | Impact on self-Player Parameters (eg., Health)
+ | Impact on World (TBD)
+RID_20 | The Plugin shall provide the capability to define a magic spell.
 
-RID_20.  The Plugin shall provide the capability to define a magic spell.
+RID_21 | The Plugin shall provide the capability to cause player to learn a magic spell.
 
-RID_21.  The Plugin shall provide the capability to cause player to learn a magic spell.
+RID_22 | The Plugin shall provide the capability to allow a player to apply a magic spell that is known by the player.
 
-RID_22.  The Plugin shall provide the capability to allow a player to apply a magic spell that is 
+RID_23 | The Plugin shall provide the capability to cause player to forget (lose) a spell.
 
-known by the player.
-RID_23.  The Plugin shall provide the capability to cause player to forget (lose) a spell.
-
-RID_24.  THe Plugin shall provide the capability to cause the duration of time before a spell
+RID_24 | THe Plugin shall provide the capability to cause the duration of time before a spell
 
 can be re-learned.
-RID_25.  The Plugin shall provide the capability to allow application of a spell based on the 
+RID_25 | The Plugin shall provide the capability to allow application of a spell based on the parameters of the spell.
 
-parameters of the spell.
 
 
 #### Weapon Capabilities
 
-RID_26. The Plugin shall provide the capability to have Weapon Capabilities with
+--- | ---
+RID_26 | The Plugin shall provide the capability to have Weapon Capabilities with parameters:
 
-parameters:
-..* Name
-..* Description
-..* Effect on weapon usage
-..* Effect on Damage inflicted
-..* Impact on self-Player Parameters (eg., Health, Stamina)
-..* Impact on World (TBD - Block breaking, or TBD)
-..* Curse effect  (negative Enchantment)
-..* Enchantment (positive Enchantment)
+ | Name
+ | Description
+ | Effect on weapon usage
+ | Effect on Damage inflicted
+ | Impact on self-Player Parameters (eg., Health, Stamina)
+ | Impact on World (TBD - Block breaking, or TBD)
+ | Curse effect  (negative Enchantment)
+ | Enchantment (positive Enchantment)
+RID_27 | The Plugin shall provide the capability to cause player to learn a weapon capability.
 
-RID_27. The Plugin shall provide the capability to cause player to learn
+RID_28 | The Plugin shall provide the capability to cause player to apply a weapon capability known by the player.
 
-a weapon capability.
-RID_28. The Plugin shall provide the capability to cause player to apply
+RID_29 | The Plugin shall provide the capability to cause player to forget (un-learn) a weapon capability.
 
-a weapon capability known by the player.
-RID_29.  The Plugin shall provide the capability to cause player to forget (un-learn)
+RID_30 | THe Plugin shall provide the capability to allow a player to modify parameters of a weapon capability.
 
-a weapon capability.
-RID_30.  THe Plugin shall provide the capability to allow a player to modify parameters
+RID_31 | The PLugin shall provide the capability to allow application of a weapon capability based on the parameters of
 
-of a weapon capability.
-RID_31.  The PLugin shall provide the capability to allow application of a weapon
-
-capability based on the parameters of
-..* The world in which the capability is used.
-..* The Race of the target of the capability.
-..* THe Class of the target of the capability.
+ | The world in which the capability is used.
+ | The Race of the target of the capability.
+ | The Class of the target of the capability.
 
 #### Talent Proficiency Capabilities
 
-RID_32. The Plugin shall provide the capability to have Talent Capabilities with
+--- | ---
+RID_32 | The Plugin shall provide the capability to have Talent Capabilities with parameters:
 
-parameters:
-..* Name
-..* Description
-..* Effect on movement
-..* Effect on Language use
-..* Effect on modifying the world (eg., breaking blocks, placing blocks, etc.. TBD)
-..* Effect on Player Class parameters
-..* Effect on Player Capabilities (Weapon, Spell, or Language, TBD)
+ | Name
+ | Description
+ | Effect on movement
+ | Effect on Language use
+ | Effect on modifying the world (eg., breaking blocks, placing blocks, etc.. TBD)
+ | Effect on Player Class parameters
+ | Effect on Player Capabilities (Weapon, Spell, or Language, TBD)
 
 
 ## Play Dynamics
