@@ -70,3 +70,10 @@ Totem mod) then we'll have reached code-complete.
 
 For the near term, stage one will be the capabilities that can be reached through the use of Sponge API 4.X
 
+## Alternative Goals
+
+This plugin can (and should) be used as a template for those who wish to try their hand at making Sponge Plugins.
+A lot of the technical setup (gradle, source organization, etc..) can be taken from here to adapt to a new Plugin
+project. I'm using (trying to at least) the best practices that are promulgated by well known Sponge developers.  If
+there is a better way to do something, I'm all ears.
+
