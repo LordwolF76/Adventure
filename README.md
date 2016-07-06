@@ -11,7 +11,14 @@ It's inspired from my play with:
   * Gamma World
   * Burning Wheel
 
+## How to Build
 
+1. `git clone https://github.com/SiboRoc/Adventure.git`
+2. `cd Adventure`
+3. `gradle setupDecompWorkspace --refresh-dependencies`
+4. `gradle build`
+
+The result library (jar) will be in `build\lib`
 
 ## Design Goals
 
