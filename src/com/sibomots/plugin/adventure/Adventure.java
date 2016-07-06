@@ -33,13 +33,22 @@
 package com.sibomots.plugin.adventure;
 
 
+import com.google.inject.Guice;
 import com.google.inject.Inject;
-import org.apache.logging.log4j.core.Logger;
+import com.google.inject.Injector;
+import com.google.inject.Key;
+import org.slf4j.Logger;
+import org.spongepowered.api.Game;
+import org.spongepowered.api.Sponge;
+import org.spongepowered.api.command.spec.CommandSpec;
 import org.spongepowered.api.event.Listener;
 import org.spongepowered.api.event.game.state.GameAboutToStartServerEvent;
 import org.spongepowered.api.event.game.state.GameStartedServerEvent;
 import org.spongepowered.api.plugin.Plugin;
 import org.spongepowered.api.plugin.PluginContainer;
+import org.spongepowered.api.text.Text;
+
+import static org.spongepowered.api.command.args.GenericArguments.string;
 
 @Plugin(id = "adventure", name = "Adventure", version = "1.0.0", description = "Adventure Time!")
 
@@ -49,25 +58,34 @@ public class Adventure {
     public static final String MOD_ID = "Adventure";
     @Inject
     public PluginContainer pluginContainer;
+
+    @Inject private Game game;
     @Inject private Logger logger;
 
     @Listener
     public void onAboutToStart(GameAboutToStartServerEvent event) {
-
         instance = this;
-        // this.loadConfig();
-        // this.customLogger = new CustomLogger();
     }
 
     @Listener
     public void onServerStarted(GameStartedServerEvent event) {
         registerBaseCommands();
-        //addLogEntry("Boot finished.");
         this.logger.info("Loaded successfully.");
     }
 
-    // handles sub commands
+    public static void LogMessage(String msg)
+    {
+        Adventure.instance.logger.info(msg);
+    }
+
     public void registerBaseCommands() {
+
+        // Sample command -- just to see how this all works
+        Sponge.getCommandManager().register(this, CommandSpec.builder()
+                .description(Text.of("Prints the Plugin License message"))
+                .permission(AdventurePermissions.COMMAND_LICENSE)
+                .executor(new CommandLicense())
+                .build(), "license", "lic");
     }
 
 }
