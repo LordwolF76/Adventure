@@ -32,8 +32,6 @@
  */
 package com.sibomots.plugin.adventure;
 
-import scala.xml.pull.EvComment;
-
 public class AdventurePermissions {
     // Claims
     private static final String PREFIX = "adventure.";
