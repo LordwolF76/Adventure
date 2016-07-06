@@ -30,26 +30,22 @@
  * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package com.sibomots.plugin.adventure;
+package com.sibomots.plugin.adventure.configuration.category;
 
-import com.sibomots.plugin.adventure.message.PreparedMessages;
-import com.sibomots.plugin.adventure.message.MessageManager;
-import org.spongepowered.api.command.CommandResult;
-import org.spongepowered.api.command.CommandSource;
-import org.spongepowered.api.command.args.CommandContext;
-import org.spongepowered.api.command.spec.CommandExecutor;
-import org.spongepowered.api.text.Text;
+import ninja.leaping.configurate.objectmapping.Setting;
+import ninja.leaping.configurate.objectmapping.serialize.ConfigSerializable;
 
-public class CommandLicense  implements CommandExecutor {
+@ConfigSerializable
+public class DatabaseCategory extends ConfigCategory {
 
-    public CommandLicense()
-    {
-    }
+    // TODO fill in command/comment with how-to for database configuration.
 
-    @Override
-    public CommandResult execute(CommandSource src, CommandContext ctx) {
-        MessageManager.sendMessage(src, Text.of(PreparedMessages.LICENSE_MESSAGE));
-        return CommandResult.success();
-    }
+    @Setting(value = "password")
+    public String databasePassword = "";
+    @Setting(value = "username")
+    public String databaseUserName = "";
+
+    // TODO Example
+    @Setting(value = "uri")
+    public String datbaseURI = "";
 }
-

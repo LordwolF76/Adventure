@@ -30,26 +30,7 @@
  * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package com.sibomots.plugin.adventure;
+package com.sibomots.plugin.adventure.game;
 
-import com.sibomots.plugin.adventure.message.PreparedMessages;
-import com.sibomots.plugin.adventure.message.MessageManager;
-import org.spongepowered.api.command.CommandResult;
-import org.spongepowered.api.command.CommandSource;
-import org.spongepowered.api.command.args.CommandContext;
-import org.spongepowered.api.command.spec.CommandExecutor;
-import org.spongepowered.api.text.Text;
-
-public class CommandLicense  implements CommandExecutor {
-
-    public CommandLicense()
-    {
-    }
-
-    @Override
-    public CommandResult execute(CommandSource src, CommandContext ctx) {
-        MessageManager.sendMessage(src, Text.of(PreparedMessages.LICENSE_MESSAGE));
-        return CommandResult.success();
-    }
+public class AttributeManager {
 }
-

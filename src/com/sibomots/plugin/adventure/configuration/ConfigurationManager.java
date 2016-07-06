@@ -30,26 +30,35 @@
  * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package com.sibomots.plugin.adventure;
+package com.sibomots.plugin.adventure.configuration;
 
-import com.sibomots.plugin.adventure.message.PreparedMessages;
-import com.sibomots.plugin.adventure.message.MessageManager;
-import org.spongepowered.api.command.CommandResult;
-import org.spongepowered.api.command.CommandSource;
-import org.spongepowered.api.command.args.CommandContext;
-import org.spongepowered.api.command.spec.CommandExecutor;
-import org.spongepowered.api.text.Text;
+import com.sibomots.plugin.adventure.Adventure;
+import com.sibomots.plugin.adventure.configuration.partitions.AdventureConfig;
+import com.sibomots.plugin.adventure.configuration.partitions.GlobalConfig;
+import com.sibomots.plugin.adventure.core.DataStore;
+import org.spongepowered.api.Sponge;
 
-public class CommandLicense  implements CommandExecutor {
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 
-    public CommandLicense()
+public class ConfigurationManager {
+
+    public static void loadConfig()
     {
-    }
+        try {
+            Files.createDirectories(DataStore.dataLayerFolderPath);
 
-    @Override
-    public CommandResult execute(CommandSource src, CommandContext ctx) {
-        MessageManager.sendMessage(src, Text.of(PreparedMessages.LICENSE_MESSAGE));
-        return CommandResult.success();
+            Path rootConfigPath = Sponge.getGame()
+                    .getSavesDirectory().resolve("configuration")
+                    .resolve(Adventure.MOD_ID);
+            DataStore.globalConfig =
+                    new AdventureConfig<GlobalConfig>(AdventureConfig.Type.GLOBAL, rootConfigPath.resolve("global.conf"));
+
+        }
+        catch(IOException e)
+        {
+
+        }
     }
 }
-

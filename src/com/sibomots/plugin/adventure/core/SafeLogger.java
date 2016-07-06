@@ -30,26 +30,31 @@
  * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package com.sibomots.plugin.adventure;
+package com.sibomots.plugin.adventure.core;
 
-import com.sibomots.plugin.adventure.message.PreparedMessages;
-import com.sibomots.plugin.adventure.message.MessageManager;
-import org.spongepowered.api.command.CommandResult;
-import org.spongepowered.api.command.CommandSource;
-import org.spongepowered.api.command.args.CommandContext;
-import org.spongepowered.api.command.spec.CommandExecutor;
-import org.spongepowered.api.text.Text;
+import com.sibomots.plugin.adventure.message.PreparedLogMessages;
+import org.spongepowered.common.SpongeImpl;
 
-public class CommandLicense  implements CommandExecutor {
 
-    public CommandLicense()
+public class SafeLogger {
+    private static SafeLogger ourInstance = new SafeLogger();
+
+    public static SafeLogger getInstance() {
+        return ourInstance;
+    }
+
+    private SafeLogger() {
+    }
+
+
+    public static void Error(String msg, Exception e)
     {
+        SpongeImpl.getLogger().error(msg, e);
     }
 
-    @Override
-    public CommandResult execute(CommandSource src, CommandContext ctx) {
-        MessageManager.sendMessage(src, Text.of(PreparedMessages.LICENSE_MESSAGE));
-        return CommandResult.success();
+    public static void Info(String msg)
+    {
+        SpongeImpl.getLogger().info(msg);
     }
+
 }
-

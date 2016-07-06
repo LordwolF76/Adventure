@@ -30,26 +30,16 @@
  * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package com.sibomots.plugin.adventure;
+package com.sibomots.plugin.adventure.configuration.partitions;
 
-import com.sibomots.plugin.adventure.message.PreparedMessages;
-import com.sibomots.plugin.adventure.message.MessageManager;
-import org.spongepowered.api.command.CommandResult;
-import org.spongepowered.api.command.CommandSource;
-import org.spongepowered.api.command.args.CommandContext;
-import org.spongepowered.api.command.spec.CommandExecutor;
-import org.spongepowered.api.text.Text;
+import com.sibomots.plugin.adventure.configuration.category.DatabaseCategory;
+import com.sibomots.plugin.adventure.configuration.category.PlayerDataCategory;
+import com.sibomots.plugin.adventure.configuration.partitions.BasisConfig;
+import ninja.leaping.configurate.objectmapping.Setting;
 
-public class CommandLicense  implements CommandExecutor {
-
-    public CommandLicense()
-    {
-    }
-
-    @Override
-    public CommandResult execute(CommandSource src, CommandContext ctx) {
-        MessageManager.sendMessage(src, Text.of(PreparedMessages.LICENSE_MESSAGE));
-        return CommandResult.success();
-    }
+public class GlobalConfig extends BasisConfig {
+    @Setting
+    public DatabaseCategory database = new DatabaseCategory();
+    @Setting
+    public PlayerDataCategory playerdata = new PlayerDataCategory();
 }
-

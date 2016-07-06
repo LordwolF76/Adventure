@@ -30,17 +30,17 @@
  * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package com.sibomots.plugin.adventure.internal;
+package com.sibomots.plugin.adventure.message;
 
 import com.sibomots.plugin.adventure.Adventure;
-import org.spongepowered.api.Sponge;
+import com.sibomots.plugin.adventure.message.Messages;
 import org.spongepowered.api.command.CommandSource;
-import org.spongepowered.api.entity.living.player.Player;
 import org.spongepowered.api.event.cause.Cause;
 import org.spongepowered.api.text.Text;
 import org.spongepowered.api.text.format.TextColor;
 
-public class Comms {
+public class MessageManager {
+
 
     public static Text getMessage(Messages messageID, String... args) {
         return null;

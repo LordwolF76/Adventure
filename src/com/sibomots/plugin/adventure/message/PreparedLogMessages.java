@@ -30,26 +30,12 @@
  * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package com.sibomots.plugin.adventure;
+package com.sibomots.plugin.adventure.message;
 
-import com.sibomots.plugin.adventure.message.PreparedMessages;
-import com.sibomots.plugin.adventure.message.MessageManager;
-import org.spongepowered.api.command.CommandResult;
-import org.spongepowered.api.command.CommandSource;
-import org.spongepowered.api.command.args.CommandContext;
-import org.spongepowered.api.command.spec.CommandExecutor;
-import org.spongepowered.api.text.Text;
+import com.sibomots.plugin.adventure.Adventure;
 
-public class CommandLicense  implements CommandExecutor {
-
-    public CommandLicense()
-    {
-    }
-
-    @Override
-    public CommandResult execute(CommandSource src, CommandContext ctx) {
-        MessageManager.sendMessage(src, Text.of(PreparedMessages.LICENSE_MESSAGE));
-        return CommandResult.success();
-    }
+public class PreparedLogMessages {
+    public static final String CONFIGURATION_INITIALIZATION_FAILED = "Configuration initialization FAILED";
+    public static final String CONFIGURATION_SAVE_FAILED = "Configuration save FAILED";
+    public static final String CONFIGURATION_LOAD_FAILED =  "Confguration load FAILED";
 }
-

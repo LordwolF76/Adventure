@@ -30,9 +30,13 @@
  * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package com.sibomots.plugin.adventure.internal;
+package com.sibomots.plugin.adventure.message;
 
-public enum Messages {
-    License,
-    Help,
+import com.sibomots.plugin.adventure.Adventure;
+
+public class PreparedMessages {
+        public static final String LICENSE_MESSAGE = Adventure.MOD_ID +
+                "Adventure is licensed under the terms of the revised BSD License: https://opensource.org/licenses/BSD-3-Clause";
+
+        public static final String OTHER_MESSAGE = "The secret words are squeamish ossifrage";
 }

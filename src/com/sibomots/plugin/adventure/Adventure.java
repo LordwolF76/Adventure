@@ -33,22 +33,23 @@
 package com.sibomots.plugin.adventure;
 
 
-import com.google.inject.Guice;
 import com.google.inject.Inject;
-import com.google.inject.Injector;
-import com.google.inject.Key;
+import com.sibomots.plugin.adventure.configuration.partitions.AdventureConfig;
+import com.sibomots.plugin.adventure.configuration.partitions.GlobalConfig;
+import com.sibomots.plugin.adventure.core.DataStore;
+import com.sibomots.plugin.adventure.core.SafeLogger;
 import org.slf4j.Logger;
 import org.spongepowered.api.Game;
 import org.spongepowered.api.Sponge;
 import org.spongepowered.api.command.spec.CommandSpec;
 import org.spongepowered.api.event.Listener;
 import org.spongepowered.api.event.game.state.GameAboutToStartServerEvent;
+import org.spongepowered.api.event.game.state.GamePreInitializationEvent;
 import org.spongepowered.api.event.game.state.GameStartedServerEvent;
+import org.spongepowered.api.event.game.state.GameInitializationEvent;
 import org.spongepowered.api.plugin.Plugin;
 import org.spongepowered.api.plugin.PluginContainer;
 import org.spongepowered.api.text.Text;
-
-import static org.spongepowered.api.command.args.GenericArguments.string;
 
 @Plugin(id = "adventure", name = "Adventure", version = "1.0.0", description = "Adventure Time!")
 
@@ -59,18 +60,36 @@ public class Adventure {
     @Inject
     public PluginContainer pluginContainer;
 
+
     @Inject private Game game;
     @Inject private Logger logger;
 
+    public static AdventureConfig<GlobalConfig> getGlobalConfig()
+    {
+        return DataStore.globalConfig;
+    }
+
+    @Listener
+    public void onPreInitialization(GamePreInitializationEvent event) {
+        SafeLogger.Info("OnPreInitialzation");
+    }
+
+    @Listener
+    public void onInitialization(GameInitializationEvent event) {
+        SafeLogger.Info("OnInitialization");
+    }
+
     @Listener
     public void onAboutToStart(GameAboutToStartServerEvent event) {
+        SafeLogger.Info("OnAboutToStart");
         instance = this;
+        SafeLogger.Info("Assigned instance to Plugin core");
     }
 
     @Listener
     public void onServerStarted(GameStartedServerEvent event) {
         registerBaseCommands();
-        this.logger.info("Loaded successfully.");
+        SafeLogger.Info("OnServerStartedHandler :: All commands Loaded successfully.");
     }
 
     public static void LogMessage(String msg)
@@ -78,14 +97,26 @@ public class Adventure {
         Adventure.instance.logger.info(msg);
     }
 
-    public void registerBaseCommands() {
+    public boolean registerBaseCommands() {
+        boolean isSuccess = false;
 
-        // Sample command -- just to see how this all works
-        Sponge.getCommandManager().register(this, CommandSpec.builder()
-                .description(Text.of("Prints the Plugin License message"))
-                .permission(AdventurePermissions.COMMAND_LICENSE)
-                .executor(new CommandLicense())
-                .build(), "license", "lic");
+        try {
+            // Sample command -- just to see how this all works
+            Sponge.getCommandManager().register(this, CommandSpec.builder()
+                    .description(Text.of("Prints the Plugin License message"))
+                    .permission(AdventurePermissions.COMMAND_LICENSE)
+                    .executor(new CommandLicense())
+                    .build(), "license", "lic");
+
+            // no issues?
+            isSuccess = true;
+        }
+        catch(Exception e)
+        {
+            isSuccess = false;
+        }
+
+        return isSuccess;
     }
 
 }

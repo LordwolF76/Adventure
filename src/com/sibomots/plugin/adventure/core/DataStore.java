@@ -30,14 +30,37 @@
  * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package com.sibomots.plugin.adventure.internal;
+package com.sibomots.plugin.adventure.core;
 
 import com.sibomots.plugin.adventure.Adventure;
+import com.sibomots.plugin.adventure.configuration.partitions.AdventureConfig;
+import com.sibomots.plugin.adventure.configuration.partitions.GlobalConfig;
+import com.sibomots.plugin.adventure.game.AttributeManager;
 
-public class PreparedData {
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
-    public static final String LICENSE_MESSAGE = Adventure.MOD_ID +
-            "Adventure is licensed under the terms of the revised BSD License: https://opensource.org/licenses/BSD-3-Clause";
+public class DataStore {
+    private final static String GLOBAL_DATA_PATH = Adventure.MOD_ID + "Data";
 
-    public static final String OTHER_MESSAGE = "The secret words are squeamish ossifrage";
+    protected AttributeManager globalAttributeManager;
+    public final static Path dataLayerFolderPath = Paths.get("configuration").resolve(Adventure.MOD_ID);
+
+    public static AdventureConfig<GlobalConfig> globalConfig;
+    public Path globalPlayerDataPath;
+    // Need a global player data manager
+
+    // Need a data manager for world data?
+
+    public final static Path globalDataPath =
+         Paths.get(GLOBAL_DATA_PATH).resolve("GlobalPlayerData");
+
+
+    void initialize()
+    {
+       // if (Adventure.getGlobalConfig().getConfig().playerdata.useGlobalPlayerDataStorage) {
+       //      this.globalAttributeManager = new AttributeManager();
+       //  }
+    }
+
 }

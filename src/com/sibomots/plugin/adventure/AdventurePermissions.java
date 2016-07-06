@@ -32,7 +32,27 @@
  */
 package com.sibomots.plugin.adventure;
 
+import scala.xml.pull.EvComment;
+
 public class AdventurePermissions {
-        // Claims
-    public static final String COMMAND_LICENSE= "adventure.general.license";
+    // Claims
+    private static final String PREFIX = "adventure.";
+    private static final String EVERYONE = "everyone.";
+    private static final String PLAYER = "player.";
+    private static final String STAFF = "staff.";
+    private static final String ADMIN = "admin.";
+
+
+    // Commands for anyone
+    public static final String COMMAND_LICENSE = PREFIX + EVERYONE + "license";
+
+    // Commands for Players+
+    public static final String COMMAND_SCORE = PREFIX + PLAYER + "score";
+
+    // Commands for Staff
+    // TODO
+
+    // Commands for Admins
+    public static final String COMMAND_ADMIN = PREFIX + ADMIN + "admin";
+
 }
