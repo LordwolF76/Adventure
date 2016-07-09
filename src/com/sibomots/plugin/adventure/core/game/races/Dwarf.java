@@ -35,7 +35,7 @@ package com.sibomots.plugin.adventure.core.game.races;
 public class Dwarf<T extends Enum<T>> extends BaseRace {
     public static final String TRAIT_DURIN_FOLK = "Durin's Folk";
     public static final String TRAIT_BLUE_DWARF = "Blue Dwarf";
-    public static final String TRAIT_GREY_DWARF = "Grey ELf";
+    public static final String TRAIT_GREY_DWARF = "Grey Dwarf";
 
     public static final String DWARF_RACE_NAME = "Dwarf";
     public static final String DWARF_RACE_NAMES = "Dwarves";

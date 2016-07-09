@@ -37,7 +37,6 @@ import ninja.leaping.configurate.objectmapping.serialize.ConfigSerializable;
 @ConfigSerializable
 public class Halfling<T extends Enum<T>> extends BaseRace {
     public static final String TRAIT_HOBBIT = "Hobbit";
-    public static final String TRAIT_MIDGET = "Midget";
 
 
     public static final String HALFLING_RACE_NAME = "Halfling";
@@ -45,8 +44,7 @@ public class Halfling<T extends Enum<T>> extends BaseRace {
 
     public enum Family
     {
-        HOBBIT(TRAIT_HOBBIT),
-        MIDGET(TRAIT_MIDGET);
+        HOBBIT(TRAIT_HOBBIT);
 
         private final String name;
 
