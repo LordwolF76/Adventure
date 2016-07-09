@@ -35,19 +35,18 @@ package com.sibomots.plugin.adventure.core.game.races;
 import ninja.leaping.configurate.objectmapping.serialize.ConfigSerializable;
 
 @ConfigSerializable
-public class Elvish<T extends Enum<T>> extends BaseRace {
-    public static final String TRAIT_HIGH_ELF = "High Elf";
-    public static final String TRAIT_WOOD_ELF = "Wood Elf";
-    public static final String TRAIT_DARK_ELF = "Dark ELf";
+public class Dwarvish<T extends Enum<T>> extends BaseRace {
+    public static final String TRAIT_DURIN_FOLK = "Durin's Folk";
+    public static final String TRAIT_BLUE_DWARF = "Blue Dwarf";
+    public static final String TRAIT_GREY_DWARF = "Grey Dwarf";
 
-    public static final String ELF_RACE_NAME = "Elf";
-    public static final String ELF_RACE_NAMES = "Elves";
+    public static final String DWARF_RACE_NAME = "Dwarf";
+    public static final String DWARF_RACE_NAMES = "Dwarves";
 
-    public enum Family
-    {
-        WOOD_ELF(TRAIT_WOOD_ELF),
-        HIGH_ELF(TRAIT_HIGH_ELF),
-        DARK_ELF(TRAIT_DARK_ELF);
+    public enum Family {
+        DURINS_FOLK(TRAIT_DURIN_FOLK),
+        BLUE_DWARF(TRAIT_BLUE_DWARF),
+        GREY_DWARF(TRAIT_GREY_DWARF);
 
         private final String name;
 

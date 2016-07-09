@@ -32,23 +32,22 @@
  */
 package com.sibomots.plugin.adventure.core.game.races;
 
-public class Dwarf<T extends Enum<T>> extends BaseRace {
-    public static final String TRAIT_DURIN_FOLK = "Durin's Folk";
-    public static final String TRAIT_BLUE_DWARF = "Blue Dwarf";
-    public static final String TRAIT_GREY_DWARF = "Grey Dwarf";
+import ninja.leaping.configurate.objectmapping.serialize.ConfigSerializable;
 
-    public static final String DWARF_RACE_NAME = "Dwarf";
-    public static final String DWARF_RACE_NAMES = "Dwarves";
+@ConfigSerializable
+public class Gnomish<T extends Enum<T>> extends BaseRace {
+
+    public static final String TRAIT_OLD_GNOME = "Old Gnome";
 
     public enum Family {
-        DURINS_FOLK(TRAIT_DURIN_FOLK),
-        BLUE_DWARF(TRAIT_BLUE_DWARF),
-        GREY_DWARF(TRAIT_GREY_DWARF);
 
+        GNOME(TRAIT_OLD_GNOME);
+        
         private final String name;
 
         Family(String name) {
             this.name = name;
         }
-    }
+        }
+
 }
