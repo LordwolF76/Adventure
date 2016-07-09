@@ -36,11 +36,8 @@ package com.sibomots.plugin.adventure;
 import com.google.inject.Inject;
 import com.sibomots.plugin.adventure.commands.AdventurePermissions;
 import com.sibomots.plugin.adventure.commands.CommandLicense;
-import com.sibomots.plugin.adventure.configuration.ConfigurationManager;
 import com.sibomots.plugin.adventure.configuration.configurations.AdventureConfig;
 import com.sibomots.plugin.adventure.configuration.configurations.GlobalConfig;
-import com.sibomots.plugin.adventure.configuration.configurations.WorldConfig;
-import com.sibomots.plugin.adventure.configuration.configurations.DimensionConfig;
 import com.sibomots.plugin.adventure.core.DataStore;
 import com.sibomots.plugin.adventure.core.SafeLogger;
 import org.slf4j.Logger;
@@ -55,7 +52,13 @@ import org.spongepowered.api.event.game.state.GameInitializationEvent;
 import org.spongepowered.api.plugin.Plugin;
 import org.spongepowered.api.plugin.PluginContainer;
 import org.spongepowered.api.text.Text;
+import org.spongepowered.api.world.DimensionType;
+import org.spongepowered.api.world.World;
 import org.spongepowered.api.world.storage.WorldProperties;
+
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 
 @Plugin(id = "adventure", name = "Adventure", version = "1.0.0", description = "Adventure Time!")
 
@@ -83,25 +86,57 @@ public class Adventure {
     @Listener
     public void onInitialization(GameInitializationEvent event) {
         SafeLogger.Info("OnInitialization");
-        ConfigurationManager.loadConfig();
+    }
+
+    public void loadConfig()
+    {
+        try {
+            Files.createDirectories(DataStore.dataLayerFolderPath);
+
+            // messages configuration
+
+
+            Path rootConfigPath = Sponge.getGame()
+                    .getSavesDirectory().resolve("config")
+                    .resolve(Adventure.MOD_ID);
+
+            DataStore.globalConfig = new AdventureConfig<GlobalConfig>(AdventureConfig.Type.GLOBAL, rootConfigPath.resolve("global.conf"));
+        }
+        catch(IOException e)
+        {
+            e.printStackTrace();
+        }
     }
 
     @Listener
     public void onAboutToStart(GameAboutToStartServerEvent event) {
-        SafeLogger.Info("OnAboutToStart");
+
+        // TODO: check the permissions plugin exists
         instance = this;
-        SafeLogger.Info("Assigned instance to Plugin core");
+
+        this.loadConfig();
+
+        if (this.dataStore == null)
+        {
+            try {
+                this.dataStore = null; //TODO new FlatFileDataStore();
+            }
+            catch (Exception e)
+            {
+                SafeLogger.Error("Unable to initialize DataStore", e);
+                e.printStackTrace();
+                return;
+            }
+        }
+        //TODO Sponge.getGame().getEventManager().registerListeners(this, new PlayerEventHandler(dataStore, this));
+        //TODO Sponge.getGame().getEventManager().registerListeners(this, new WorldEventHandler());
+        SafeLogger.Info("Finished loading data");
     }
 
     @Listener
     public void onServerStarted(GameStartedServerEvent event) {
         registerBaseCommands();
         SafeLogger.Info("OnServerStartedHandler :: All commands Loaded successfully.");
-    }
-
-    public static void LogMessage(String msg)
-    {
-        Adventure.instance.logger.info(msg);
     }
 
     public boolean registerBaseCommands() {
@@ -127,19 +162,6 @@ public class Adventure {
     }
 
     public static AdventureConfig<?> getActiveConfig(WorldProperties worldProperties) {
-        AdventureConfig<WorldConfig> worldConfig = DataStore.worldConfigMap.get(worldProperties.getUniqueId());
-        AdventureConfig<DimensionConfig> dimConfig = DataStore.dimensionConfigMap.get(worldProperties.getUniqueId());
-        if (worldConfig == null || worldConfig.getConfig() == null) {
             return DataStore.globalConfig;
-        }
-        if (worldConfig.getConfig().isOverrideConfigEnabled) {
-            return worldConfig;
-        } else if (dimConfig.getConfig().isDImensionConfigEnabled) {
-            return dimConfig;
-        } else {
-            return DataStore.globalConfig;
-        }
     }
-
-
 }

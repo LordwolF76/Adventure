@@ -32,27 +32,36 @@
  */
 package com.sibomots.plugin.adventure.core.game.races;
 
+import ninja.leaping.configurate.objectmapping.Setting;
 import ninja.leaping.configurate.objectmapping.serialize.ConfigSerializable;
 
 @ConfigSerializable
 public class Elvish<T extends Enum<T>> extends BaseRace {
-    public static final String TRAIT_HIGH_ELF = "High Elf";
-    public static final String TRAIT_WOOD_ELF = "Wood Elf";
-    public static final String TRAIT_DARK_ELF = "Dark ELf";
+    public static final String HIGH_ELF_NAME = "High Elf";
+    public static final String WOOD_ELF_NAME = "Wood Elf";
+    public static final String DARK_ELF_NAME = "Dark ELf";
 
     public static final String ELF_RACE_NAME = "Elf";
     public static final String ELF_RACE_NAMES = "Elves";
 
+    @Setting(value = "elvish-subfamily")
+    Family elvish_subfamily;
+
     public enum Family
     {
-        WOOD_ELF(TRAIT_WOOD_ELF),
-        HIGH_ELF(TRAIT_HIGH_ELF),
-        DARK_ELF(TRAIT_DARK_ELF);
+        WOOD_ELF(WOOD_ELF_NAME),
+        HIGH_ELF(HIGH_ELF_NAME),
+        DARK_ELF(DARK_ELF_NAME);
 
         private final String name;
 
         Family(String name) {
             this.name = name;
         }
+    }
+
+    public Elvish()
+    {
+
     }
 }

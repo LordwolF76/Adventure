@@ -55,9 +55,7 @@ import java.util.concurrent.ForkJoinPool;
 public class AdventureConfig<T extends BasisConfig> {
 
     public enum Type {
-        GLOBAL(GlobalConfig.class),
-        DIMENSION(DimensionConfig.class),
-        WORLD(WorldConfig.class);
+        GLOBAL(GlobalConfig.class);
 
         private final Class<? extends BasisConfig> clazz;
 

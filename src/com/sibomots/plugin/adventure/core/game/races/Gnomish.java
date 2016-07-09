@@ -42,7 +42,7 @@ public class Gnomish<T extends Enum<T>> extends BaseRace {
     public enum Family {
 
         GNOME(TRAIT_OLD_GNOME);
-        
+
         private final String name;
 
         Family(String name) {

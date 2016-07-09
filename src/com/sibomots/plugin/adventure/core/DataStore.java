@@ -35,43 +35,48 @@ package com.sibomots.plugin.adventure.core;
 import com.google.common.collect.Maps;
 import com.sibomots.plugin.adventure.Adventure;
 import com.sibomots.plugin.adventure.configuration.configurations.AdventureConfig;
-import com.sibomots.plugin.adventure.configuration.configurations.DimensionConfig;
 import com.sibomots.plugin.adventure.configuration.configurations.GlobalConfig;
-import com.sibomots.plugin.adventure.configuration.configurations.WorldConfig;
+import com.sibomots.plugin.adventure.core.game.character.PlayerCharacter;
 import org.spongepowered.api.Sponge;
+import org.spongepowered.api.world.storage.WorldProperties;
 
 import java.io.File;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Map;
 import java.util.UUID;
+import javax.annotation.Nullable;
 
 public class DataStore {
     public static AdventureConfig<GlobalConfig> globalConfig;
     public static Path globalPlayerDataPath;
 
-    public static Map<UUID, AdventureConfig<DimensionConfig>> dimensionConfigMap = Maps.newHashMap();
-    public static Map<UUID, AdventureConfig<WorldConfig>> worldConfigMap = Maps.newHashMap();
+    public final Map<UUID, CharacterManager> characterManagers = Maps.newHashMap();
+    protected CharacterManager globalCharacterManager;
 
     public final static String GLOBAL_DATA_PATH = Adventure.MOD_ID + "Data";
     public final static Path dataLayerFolderPath = Paths.get("config").resolve(Adventure.MOD_ID);
     public final static Path globalDataPath =
             Paths.get(GLOBAL_DATA_PATH).resolve("GlobalPlayerData");
 
-    private static CharacterSheetManager globalCharacterSheetManager;
+    private static CharacterManager globalCharacterSheetManager;
 
 
+    public PlayerCharacter createCharacter(WorldProperties worldProp, UUID playerID )
+    {
+       CharacterManager characterManager = this.getCharacterManager(worldProp);
+        return characterManager.createPlayerCharacterSheet(playerID);
+    }
+
+    @Nullable
+    public CharacterManager getCharacterManager(WorldProperties worldProperties)    {
+            return this.globalCharacterManager;
+    }
 
     void initialize()
     {
-       // if (Adventure.getGlobalConfig().getConfig().playerdata.useGlobalPlayerDataStorage) {
-       //      this.globalAttributeManager = new AttributeManager();
-       //  }
+        this.globalCharacterSheetManager = new CharacterManager();
 
-        // ensure global player data folder exists
-        if (Adventure.getGlobalConfig().getConfig().playerdata.useGlobalPlayerDataStorage) {
-            this.globalCharacterSheetManager = new CharacterSheetManager();
-        }
         DataStore.globalPlayerDataPath = Sponge.getGame()
                         .getSavesDirectory()
                         .resolve(Sponge.getServer()

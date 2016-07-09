@@ -77,7 +77,7 @@ public class MessageManager {
         }
 
         if (player == null) {
-            Adventure.LogMessage(Text.of(message).toPlain());
+            SafeLogger.Info(Text.of(message).toPlain());
         } else {
             player.sendMessage(message);
         }

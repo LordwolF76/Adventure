@@ -44,7 +44,7 @@ import java.nio.file.Paths;
 import java.util.Map;
 import java.util.UUID;
 
-public class CharacterSheetManager {
+public class CharacterManager {
 
     public final static Path playerDataPath = Paths.get(Adventure.MOD_ID, "PlayerData");
     private boolean useGlobalStorage = false;
@@ -53,14 +53,14 @@ public class CharacterSheetManager {
     private Map<UUID, PlayerCharacter> playerDataList = Maps.newHashMap();
     private Map<UUID, PlayerStorageData> playerStorageList = Maps.newHashMap();
 
-    public CharacterSheetManager()
+    public CharacterManager()
     {
         this.worldProperties = null;
         this.activeConfig = Adventure.getGlobalConfig();
         this.useGlobalStorage = true;
     }
 
-    public CharacterSheetManager(WorldProperties worldProperties) {
+    public CharacterManager(WorldProperties worldProperties) {
         this.worldProperties = worldProperties;
         this.activeConfig = Adventure.getActiveConfig(this.worldProperties);
     }
@@ -87,12 +87,8 @@ public class CharacterSheetManager {
 
         Path playerFilePath = null;
 
-        if (this.useGlobalStorage ||
-                this.worldProperties.getUniqueId() ==
-                        Sponge.getGame().getServer().getDefaultWorld().get().getUniqueId()) {
+        if (this.useGlobalStorage ) {
             playerFilePath = rootPath.resolve(playerDataPath).resolve(playerUniqueId.toString());
-        } else {
-            playerFilePath = rootPath.resolve(this.worldProperties.getWorldName()).resolve(playerDataPath).resolve(playerUniqueId.toString());
         }
 
         PlayerStorageData playerStorage =
@@ -105,6 +101,7 @@ public class CharacterSheetManager {
         playerData = new PlayerCharacter(this.worldProperties,
                         playerUniqueId, playerStorage, this.activeConfig,
                         sampleInitialPlayerCharacterSheetInstance);
+
         this.playerStorageList.put(playerUniqueId, playerStorage);
         this.playerDataList.put(playerUniqueId, playerData);
         return playerData;

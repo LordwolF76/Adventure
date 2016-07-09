@@ -39,5 +39,5 @@ import ninja.leaping.configurate.objectmapping.serialize.ConfigSerializable;
 public class PlayerDataCategory extends ConfigCategory {
 
     @Setting(value = "use-global-data-storage")
-    public boolean useGlobalPlayerDataStorage = false;
+    public boolean useGlobalPlayerDataStorage = true;
 }
