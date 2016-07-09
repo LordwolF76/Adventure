@@ -30,12 +30,53 @@
  * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package com.sibomots.plugin.adventure.message;
+package com.sibomots.plugin.adventure.core.game.character;
 
-import com.sibomots.plugin.adventure.Adventure;
+import com.sibomots.plugin.adventure.configuration.configurations.AdventureConfig;
 
-public class PreparedLogMessages {
-    public static final String CONFIGURATION_INITIALIZATION_FAILED = "Configuration initialization FAILED";
-    public static final String CONFIGURATION_SAVE_FAILED = "Configuration save FAILED";
-    public static final String CONFIGURATION_LOAD_FAILED =  "Confguration load FAILED";
+import java.util.UUID;
+
+import com.sibomots.plugin.adventure.core.PlayerStorageData;
+import org.spongepowered.api.world.Location;
+import org.spongepowered.api.world.World;
+import org.spongepowered.api.world.storage.WorldProperties;
+
+public class PlayerCharacter {
+
+    // TODO
+
+    public UUID playerID;
+    private WorldProperties worldProperties;
+    private AdventureConfig<?> activeConfig;
+    private PlayerStorageData playerStorage;
+    public Location<World> lastPosition;
+    private Object sheet;
+    private boolean inAdventure;
+
+    public PlayerCharacter(WorldProperties worldProperties,
+                           UUID playerUniqueId,
+                           PlayerStorageData playerStorage,
+                           AdventureConfig<?> activeConfig, Object sheet ) {
+        this.worldProperties = worldProperties;
+        this.playerID = playerUniqueId;
+        this.playerStorage = playerStorage;
+        this.activeConfig = activeConfig;
+        this.sheet = sheet;
+        this.inAdventure = false;
+    }
+
+
+    public void saveAllData() {
+        this.playerStorage.save();
+    }
+    public PlayerStorageData getStorageData() {
+        return this.playerStorage;
+    }
+
+    public void setPlayerInAdventure(boolean inAdventure)
+    {
+        this.inAdventure = inAdventure;
+    }
+
+
 }

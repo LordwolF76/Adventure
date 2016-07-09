@@ -34,8 +34,13 @@ package com.sibomots.plugin.adventure;
 
 
 import com.google.inject.Inject;
-import com.sibomots.plugin.adventure.configuration.partitions.AdventureConfig;
-import com.sibomots.plugin.adventure.configuration.partitions.GlobalConfig;
+import com.sibomots.plugin.adventure.commands.AdventurePermissions;
+import com.sibomots.plugin.adventure.commands.CommandLicense;
+import com.sibomots.plugin.adventure.configuration.ConfigurationManager;
+import com.sibomots.plugin.adventure.configuration.configurations.AdventureConfig;
+import com.sibomots.plugin.adventure.configuration.configurations.GlobalConfig;
+import com.sibomots.plugin.adventure.configuration.configurations.WorldConfig;
+import com.sibomots.plugin.adventure.configuration.configurations.DimensionConfig;
 import com.sibomots.plugin.adventure.core.DataStore;
 import com.sibomots.plugin.adventure.core.SafeLogger;
 import org.slf4j.Logger;
@@ -50,6 +55,7 @@ import org.spongepowered.api.event.game.state.GameInitializationEvent;
 import org.spongepowered.api.plugin.Plugin;
 import org.spongepowered.api.plugin.PluginContainer;
 import org.spongepowered.api.text.Text;
+import org.spongepowered.api.world.storage.WorldProperties;
 
 @Plugin(id = "adventure", name = "Adventure", version = "1.0.0", description = "Adventure Time!")
 
@@ -57,10 +63,10 @@ public class Adventure {
 
     public static Adventure instance;
     public static final String MOD_ID = "Adventure";
-    @Inject
-    public PluginContainer pluginContainer;
 
+    private static DataStore dataStore;
 
+    @Inject public PluginContainer pluginContainer;
     @Inject private Game game;
     @Inject private Logger logger;
 
@@ -77,6 +83,7 @@ public class Adventure {
     @Listener
     public void onInitialization(GameInitializationEvent event) {
         SafeLogger.Info("OnInitialization");
+        ConfigurationManager.loadConfig();
     }
 
     @Listener
@@ -118,5 +125,21 @@ public class Adventure {
 
         return isSuccess;
     }
+
+    public static AdventureConfig<?> getActiveConfig(WorldProperties worldProperties) {
+        AdventureConfig<WorldConfig> worldConfig = DataStore.worldConfigMap.get(worldProperties.getUniqueId());
+        AdventureConfig<DimensionConfig> dimConfig = DataStore.dimensionConfigMap.get(worldProperties.getUniqueId());
+        if (worldConfig == null || worldConfig.getConfig() == null) {
+            return DataStore.globalConfig;
+        }
+        if (worldConfig.getConfig().isOverrideConfigEnabled) {
+            return worldConfig;
+        } else if (dimConfig.getConfig().isDImensionConfigEnabled) {
+            return dimConfig;
+        } else {
+            return DataStore.globalConfig;
+        }
+    }
+
 
 }

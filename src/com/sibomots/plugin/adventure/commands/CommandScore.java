@@ -30,26 +30,60 @@
  * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package com.sibomots.plugin.adventure;
+package com.sibomots.plugin.adventure.commands;
 
-import com.sibomots.plugin.adventure.message.PreparedMessages;
-import com.sibomots.plugin.adventure.message.MessageManager;
+
+import com.sibomots.plugin.adventure.core.UserPlayerIdentityUtilities;
+import org.spongepowered.api.command.CommandException;
 import org.spongepowered.api.command.CommandResult;
 import org.spongepowered.api.command.CommandSource;
 import org.spongepowered.api.command.args.CommandContext;
 import org.spongepowered.api.command.spec.CommandExecutor;
+import org.spongepowered.api.entity.living.player.Player;
+import org.spongepowered.api.entity.living.player.User;
 import org.spongepowered.api.text.Text;
 
-public class CommandLicense  implements CommandExecutor {
+public class CommandScore implements CommandExecutor {
 
-    public CommandLicense()
+    /**
+     * Internal handler for the command.  Retreives the data internally
+     * and provides the functionality of the command.  Called by the
+     * interface defined Executor.
+     * @param player
+     * @param arg
+     * @throws CommandException
+     */
+    private void handleCommand(CommandSource player, String arg) throws CommandException
     {
+        if ( player instanceof Player)
+        {
+            // DO SOMEHTING (TODO)
+            User usr = UserPlayerIdentityUtilities.resolvePlayerByName(arg).orElse(null);
+          //  Score data = Adventure.getDataStore().getPlayerScore(usr).orElse(null);
+        }
+        else
+        {
+            throw new CommandException(Text.of("The command source to execute Player Score was not a player object"));
+        }
     }
 
+
+    /**
+     * The executor of the command per the Interface.
+     * May call upon internal functions to this class to help fulfill the
+     * completion of the command action.
+     * @param src
+     * @param cmdContext
+     * @return CommandResult
+     */
     @Override
-    public CommandResult execute(CommandSource src, CommandContext ctx) {
-        MessageManager.sendMessage(src, Text.of(PreparedMessages.LICENSE_MESSAGE));
+    public CommandResult execute(CommandSource src, CommandContext cmdContext) {
+        try {
+            String arg = cmdContext.<String>getOne("subject").get();
+            handleCommand(src, arg);
+        } catch (CommandException e) {
+            src.sendMessage(e.getText());
+        }
         return CommandResult.success();
     }
 }
-

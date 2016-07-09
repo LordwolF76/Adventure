@@ -30,16 +30,15 @@
  * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package com.sibomots.plugin.adventure.configuration.partitions;
+package com.sibomots.plugin.adventure.configuration.statics;
 
-import com.sibomots.plugin.adventure.configuration.category.DatabaseCategory;
-import com.sibomots.plugin.adventure.configuration.category.PlayerDataCategory;
-import com.sibomots.plugin.adventure.configuration.partitions.BasisConfig;
-import ninja.leaping.configurate.objectmapping.Setting;
-
-public class GlobalConfig extends BasisConfig {
-    @Setting
-    public DatabaseCategory database = new DatabaseCategory();
-    @Setting
-    public PlayerDataCategory playerdata = new PlayerDataCategory();
+public enum MessageType {
+    License,
+    Help,
 }
+
+
+
+
+
+

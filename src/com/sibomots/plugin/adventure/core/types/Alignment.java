@@ -30,15 +30,53 @@
  * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package com.sibomots.plugin.adventure.message;
+package com.sibomots.plugin.adventure.core.types;
 
-public enum Messages {
-    License,
-    Help,
+public class Alignment  {
+        public enum LawAndOrder
+        {
+                NEUTRAL(0),
+                LAWFUL(1),
+                CHAOTIC(2);
+
+                int value;
+                LawAndOrder(int value)
+                {
+                        this.value = value;
+                }
+        }
+
+        public enum GoodAndEvil
+        {
+                GOOD(1),
+                EVIL(-1),
+                NEUTRAL(0);
+
+                int value;
+                GoodAndEvil(int value)
+                {
+                        this.value = value;
+                }
+        }
+        public enum Type {
+                NEUTRALITY(LawAndOrder.NEUTRAL, GoodAndEvil.NEUTRAL),
+                NEUTRAL_GOOD(LawAndOrder.NEUTRAL, GoodAndEvil.GOOD),
+                NEUTRAL_EVIL(LawAndOrder.NEUTRAL, GoodAndEvil.EVIL),
+                LAWFUL_GOOD(LawAndOrder.LAWFUL, GoodAndEvil.GOOD),
+                LAWFUL_NEUTRAL(LawAndOrder.LAWFUL, GoodAndEvil.NEUTRAL),
+                LAWFUL_EVIL(LawAndOrder.LAWFUL, GoodAndEvil.EVIL),
+                CHAOTIC_GOOD(LawAndOrder.CHAOTIC, GoodAndEvil.GOOD),
+                CHAOTIC_NRUTRAL(LawAndOrder.CHAOTIC, GoodAndEvil.NEUTRAL),
+                CHAOTIC_EVIL(LawAndOrder.CHAOTIC, GoodAndEvil.EVIL);
+
+                LawAndOrder lawfulness;
+                GoodAndEvil goodness;
+
+                Type(LawAndOrder lawfulness, GoodAndEvil goodness)
+                {
+                    this.lawfulness = lawfulness;
+                    this.goodness = goodness;
+                }
+        }
 }
-
-
-
-
-
 

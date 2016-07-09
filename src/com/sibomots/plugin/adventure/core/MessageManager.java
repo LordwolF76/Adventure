@@ -30,10 +30,10 @@
  * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package com.sibomots.plugin.adventure.message;
+package com.sibomots.plugin.adventure.core;
 
 import com.sibomots.plugin.adventure.Adventure;
-import com.sibomots.plugin.adventure.message.Messages;
+import com.sibomots.plugin.adventure.configuration.statics.MessageType;
 import org.spongepowered.api.command.CommandSource;
 import org.spongepowered.api.event.cause.Cause;
 import org.spongepowered.api.text.Text;
@@ -42,19 +42,19 @@ import org.spongepowered.api.text.format.TextColor;
 public class MessageManager {
 
 
-    public static Text getMessage(Messages messageID, String... args) {
+    public static Text getMessage(MessageType messageID, String... args) {
         return null;
     }
-    public static void sendMessage(Cause cause, TextColor color, Messages messageID, String... args) {
+    public static void sendMessage(Cause cause, TextColor color, MessageType messageID, String... args) {
         if (cause.root() instanceof CommandSource) {
             sendMessage((CommandSource) cause.root(), color, messageID, args);
         }
     }
-    public static void sendMessage(CommandSource player, TextColor color, Messages messageID, String... args) {
+    public static void sendMessage(CommandSource player, TextColor color, MessageType messageID, String... args) {
         sendMessage(player, color, messageID, 0, args);
     }
 
-    public static void sendMessage(CommandSource player, TextColor color, Messages messageID, long delayInTicks, String... args) {
+    public static void sendMessage(CommandSource player, TextColor color, MessageType messageID, long delayInTicks, String... args) {
     }
     public static void sendMessage(Cause cause, TextColor color, String message) {
         if (cause.root() instanceof CommandSource) {

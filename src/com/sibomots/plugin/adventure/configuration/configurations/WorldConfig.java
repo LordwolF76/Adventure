@@ -30,35 +30,11 @@
  * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package com.sibomots.plugin.adventure.configuration;
+package com.sibomots.plugin.adventure.configuration.configurations;
 
-import com.sibomots.plugin.adventure.Adventure;
-import com.sibomots.plugin.adventure.configuration.configurations.AdventureConfig;
-import com.sibomots.plugin.adventure.configuration.configurations.GlobalConfig;
-import com.sibomots.plugin.adventure.core.DataStore;
-import org.spongepowered.api.Sponge;
+import ninja.leaping.configurate.objectmapping.Setting;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-
-public class ConfigurationManager {
-
-    public static void loadConfig()
-    {
-        try {
-            Files.createDirectories(DataStore.dataLayerFolderPath);
-
-            Path rootConfigPath = Sponge.getGame()
-                    .getSavesDirectory().resolve("config")
-                    .resolve(Adventure.MOD_ID);
-            DataStore.globalConfig =
-                    new AdventureConfig<GlobalConfig>(AdventureConfig.Type.GLOBAL, rootConfigPath.resolve("global.conf"));
-
-        }
-        catch(IOException e)
-        {
-
-        }
-    }
+public class WorldConfig extends BasisConfig {
+    @Setting(value = "config-enabled", comment = "Enabling configuration will override configuration for Dimension and GLobal")
+    public boolean isOverrideConfigEnabled = false;
 }

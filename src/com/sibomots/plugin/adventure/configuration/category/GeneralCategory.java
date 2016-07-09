@@ -30,27 +30,15 @@
  * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package com.sibomots.plugin.adventure;
+package com.sibomots.plugin.adventure.configuration.category;
 
-public class AdventurePermissions {
-    // Claims
-    private static final String PREFIX = "adventure.";
-    private static final String EVERYONE = "everyone.";
-    private static final String PLAYER = "player.";
-    private static final String STAFF = "staff.";
-    private static final String ADMIN = "admin.";
+import ninja.leaping.configurate.objectmapping.Setting;
+import ninja.leaping.configurate.objectmapping.serialize.ConfigSerializable;
 
+@ConfigSerializable
+public class GeneralCategory extends ConfigCategory {
 
-    // Commands for anyone
-    public static final String COMMAND_LICENSE = PREFIX + EVERYONE + "license";
-
-    // Commands for Players+
-    public static final String COMMAND_SCORE = PREFIX + PLAYER + "score";
-
-    // Commands for Staff
-    // TODO
-
-    // Commands for Admins
-    public static final String COMMAND_ADMIN = PREFIX + ADMIN + "admin";
-
+    @Setting(value = "foobar", comment = "A Foobar")
+    public boolean isFoobar = false;
 }
+

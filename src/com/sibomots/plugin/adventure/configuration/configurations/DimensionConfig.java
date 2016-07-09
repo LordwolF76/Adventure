@@ -30,10 +30,11 @@
  * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package com.sibomots.plugin.adventure.configuration.partitions;
+package com.sibomots.plugin.adventure.configuration.configurations;
 
 import ninja.leaping.configurate.objectmapping.Setting;
 
-public abstract class BasisConfig {
-
+public class DimensionConfig extends BasisConfig {
+    @Setting(value = "config-enabled", comment = "Enabling Dimension Config will override Global Config")
+    public boolean isDImensionConfigEnabled = false;
 }

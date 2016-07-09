@@ -30,35 +30,30 @@
  * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package com.sibomots.plugin.adventure.configuration;
+package com.sibomots.plugin.adventure.core.game.races;
 
-import com.sibomots.plugin.adventure.Adventure;
-import com.sibomots.plugin.adventure.configuration.configurations.AdventureConfig;
-import com.sibomots.plugin.adventure.configuration.configurations.GlobalConfig;
-import com.sibomots.plugin.adventure.core.DataStore;
-import org.spongepowered.api.Sponge;
+import ninja.leaping.configurate.objectmapping.serialize.ConfigSerializable;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
 
-public class ConfigurationManager {
+@ConfigSerializable
+public class Elvish<T extends Enum<T>> extends BaseRace {
+    public static final String TRAIT_HIGH_ELF = "High Elf";
+    public static final String TRAIT_WOOD_ELF = "Wood Elf";
+    public static final String TRAIT_DARK_ELF = "Dark ELf";
 
-    public static void loadConfig()
+    public static final String ELF_RACE_NAME = "Elf";
+    public static final String ELF_RACE_NAMES = "Elves";
+
+    public enum Family
     {
-        try {
-            Files.createDirectories(DataStore.dataLayerFolderPath);
+        WOOD_ELF(TRAIT_WOOD_ELF),
+        HIGH_ELF(TRAIT_HIGH_ELF),
+        DARK_ELF(TRAIT_DARK_ELF);
 
-            Path rootConfigPath = Sponge.getGame()
-                    .getSavesDirectory().resolve("config")
-                    .resolve(Adventure.MOD_ID);
-            DataStore.globalConfig =
-                    new AdventureConfig<GlobalConfig>(AdventureConfig.Type.GLOBAL, rootConfigPath.resolve("global.conf"));
+        private final String name;
 
-        }
-        catch(IOException e)
-        {
-
+        Family(String name) {
+            this.name = name;
         }
     }
 }

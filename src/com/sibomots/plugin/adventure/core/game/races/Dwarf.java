@@ -30,35 +30,25 @@
  * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package com.sibomots.plugin.adventure.configuration;
+package com.sibomots.plugin.adventure.core.game.races;
 
-import com.sibomots.plugin.adventure.Adventure;
-import com.sibomots.plugin.adventure.configuration.configurations.AdventureConfig;
-import com.sibomots.plugin.adventure.configuration.configurations.GlobalConfig;
-import com.sibomots.plugin.adventure.core.DataStore;
-import org.spongepowered.api.Sponge;
+public class Dwarf<T extends Enum<T>> extends BaseRace {
+    public static final String TRAIT_DURIN_FOLK = "Durin's Folk";
+    public static final String TRAIT_BLUE_DWARF = "Blue Dwarf";
+    public static final String TRAIT_GREY_DWARF = "Grey ELf";
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
+    public static final String DWARF_RACE_NAME = "Dwarf";
+    public static final String DWARF_RACE_NAMES = "Dwarves";
 
-public class ConfigurationManager {
+    public enum Family {
+        DURINS_FOLK(TRAIT_DURIN_FOLK),
+        BLUE_DWARF(TRAIT_BLUE_DWARF),
+        GREY_DWARF(TRAIT_GREY_DWARF);
 
-    public static void loadConfig()
-    {
-        try {
-            Files.createDirectories(DataStore.dataLayerFolderPath);
+        private final String name;
 
-            Path rootConfigPath = Sponge.getGame()
-                    .getSavesDirectory().resolve("config")
-                    .resolve(Adventure.MOD_ID);
-            DataStore.globalConfig =
-                    new AdventureConfig<GlobalConfig>(AdventureConfig.Type.GLOBAL, rootConfigPath.resolve("global.conf"));
-
-        }
-        catch(IOException e)
-        {
-
+        Family(String name) {
+            this.name = name;
         }
     }
 }

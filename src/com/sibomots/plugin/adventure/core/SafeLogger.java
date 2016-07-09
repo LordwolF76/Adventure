@@ -32,7 +32,6 @@
  */
 package com.sibomots.plugin.adventure.core;
 
-import com.sibomots.plugin.adventure.message.PreparedLogMessages;
 import org.spongepowered.common.SpongeImpl;
 
 

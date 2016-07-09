@@ -30,12 +30,12 @@
  * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package com.sibomots.plugin.adventure.configuration.partitions;
+package com.sibomots.plugin.adventure.configuration.configurations;
 
 import com.google.common.reflect.TypeToken;
 import com.sibomots.plugin.adventure.Adventure;
 import com.sibomots.plugin.adventure.core.SafeLogger;
-import com.sibomots.plugin.adventure.message.PreparedLogMessages;
+import com.sibomots.plugin.adventure.configuration.statics.PreparedLogMessages;
 import ninja.leaping.configurate.ConfigurationOptions;
 import ninja.leaping.configurate.commented.CommentedConfigurationNode;
 import ninja.leaping.configurate.commented.SimpleCommentedConfigurationNode;
@@ -44,7 +44,6 @@ import ninja.leaping.configurate.objectmapping.ObjectMapper;
 import ninja.leaping.configurate.objectmapping.ObjectMappingException;
 import ninja.leaping.configurate.objectmapping.serialize.TypeSerializers;
 import org.spongepowered.api.util.Functional;
-import org.spongepowered.common.SpongeImpl;
 import org.spongepowered.common.util.IpSet;
 
 import java.io.IOException;
@@ -56,9 +55,9 @@ import java.util.concurrent.ForkJoinPool;
 public class AdventureConfig<T extends BasisConfig> {
 
     public enum Type {
-        GLOBAL(GlobalConfig.class);
-        //   DIMENSION(DimensionConfig.class),
-        //   WORLD(WorldConfig.class);
+        GLOBAL(GlobalConfig.class),
+        DIMENSION(DimensionConfig.class),
+        WORLD(WorldConfig.class);
 
         private final Class<? extends BasisConfig> clazz;
 

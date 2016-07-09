@@ -32,28 +32,34 @@
  */
 package com.sibomots.plugin.adventure.core;
 
+import com.google.common.collect.Maps;
 import com.sibomots.plugin.adventure.Adventure;
-import com.sibomots.plugin.adventure.configuration.partitions.AdventureConfig;
-import com.sibomots.plugin.adventure.configuration.partitions.GlobalConfig;
-import com.sibomots.plugin.adventure.game.AttributeManager;
+import com.sibomots.plugin.adventure.configuration.configurations.AdventureConfig;
+import com.sibomots.plugin.adventure.configuration.configurations.DimensionConfig;
+import com.sibomots.plugin.adventure.configuration.configurations.GlobalConfig;
+import com.sibomots.plugin.adventure.configuration.configurations.WorldConfig;
+import org.spongepowered.api.Sponge;
 
+import java.io.File;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Map;
+import java.util.UUID;
 
 public class DataStore {
-    private final static String GLOBAL_DATA_PATH = Adventure.MOD_ID + "Data";
-
-    protected AttributeManager globalAttributeManager;
-    public final static Path dataLayerFolderPath = Paths.get("configuration").resolve(Adventure.MOD_ID);
-
     public static AdventureConfig<GlobalConfig> globalConfig;
-    public Path globalPlayerDataPath;
-    // Need a global player data manager
+    public static Path globalPlayerDataPath;
 
-    // Need a data manager for world data?
+    public static Map<UUID, AdventureConfig<DimensionConfig>> dimensionConfigMap = Maps.newHashMap();
+    public static Map<UUID, AdventureConfig<WorldConfig>> worldConfigMap = Maps.newHashMap();
 
+    public final static String GLOBAL_DATA_PATH = Adventure.MOD_ID + "Data";
+    public final static Path dataLayerFolderPath = Paths.get("config").resolve(Adventure.MOD_ID);
     public final static Path globalDataPath =
-         Paths.get(GLOBAL_DATA_PATH).resolve("GlobalPlayerData");
+            Paths.get(GLOBAL_DATA_PATH).resolve("GlobalPlayerData");
+
+    private static CharacterSheetManager globalCharacterSheetManager;
+
 
 
     void initialize()
@@ -61,6 +67,22 @@ public class DataStore {
        // if (Adventure.getGlobalConfig().getConfig().playerdata.useGlobalPlayerDataStorage) {
        //      this.globalAttributeManager = new AttributeManager();
        //  }
+
+        // ensure global player data folder exists
+        if (Adventure.getGlobalConfig().getConfig().playerdata.useGlobalPlayerDataStorage) {
+            this.globalCharacterSheetManager = new CharacterSheetManager();
+        }
+        DataStore.globalPlayerDataPath = Sponge.getGame()
+                        .getSavesDirectory()
+                        .resolve(Sponge.getServer()
+                        .getDefaultWorldName())
+                        .resolve(globalDataPath);
+
+        File globalPlayerDataFolder = DataStore.globalPlayerDataPath.toFile();
+        if (!globalPlayerDataFolder.exists()) {
+            globalPlayerDataFolder.mkdirs();
+        }
+
     }
 
 }

@@ -30,35 +30,38 @@
  * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package com.sibomots.plugin.adventure.configuration;
+package com.sibomots.plugin.adventure.core;
 
-import com.sibomots.plugin.adventure.Adventure;
-import com.sibomots.plugin.adventure.configuration.configurations.AdventureConfig;
-import com.sibomots.plugin.adventure.configuration.configurations.GlobalConfig;
-import com.sibomots.plugin.adventure.core.DataStore;
 import org.spongepowered.api.Sponge;
+import org.spongepowered.api.entity.living.player.Player;
+import org.spongepowered.api.entity.living.player.User;
+import org.spongepowered.api.service.user.UserStorageService;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
+import java.util.Optional;
 
-public class ConfigurationManager {
+public class UserPlayerIdentityUtilities {
+    private static UserPlayerIdentityUtilities ourInstance = new UserPlayerIdentityUtilities();
 
-    public static void loadConfig()
-    {
-        try {
-            Files.createDirectories(DataStore.dataLayerFolderPath);
-
-            Path rootConfigPath = Sponge.getGame()
-                    .getSavesDirectory().resolve("config")
-                    .resolve(Adventure.MOD_ID);
-            DataStore.globalConfig =
-                    new AdventureConfig<GlobalConfig>(AdventureConfig.Type.GLOBAL, rootConfigPath.resolve("global.conf"));
-
-        }
-        catch(IOException e)
-        {
-
-        }
+    public static UserPlayerIdentityUtilities getInstance() {
+        return ourInstance;
     }
+
+    private UserPlayerIdentityUtilities() {
+    }
+
+    public static Optional<User> resolvePlayerByName(String name) {
+
+        Optional<Player> targetPlayer = Sponge.getGame().getServer().getPlayer(name);
+        if (targetPlayer.isPresent()) {
+            return Optional.of((User) targetPlayer.get());
+        }
+
+        Optional<User> user = Sponge.getGame().getServiceManager().provide(UserStorageService.class).get().get(name);
+        if (user.isPresent()) {
+            return user;
+        }
+
+        return Optional.empty();
+    }
+
 }

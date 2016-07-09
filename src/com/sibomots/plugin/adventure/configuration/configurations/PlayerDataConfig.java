@@ -30,35 +30,48 @@
  * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package com.sibomots.plugin.adventure.configuration;
+package com.sibomots.plugin.adventure.configuration.configurations;
 
-import com.sibomots.plugin.adventure.Adventure;
-import com.sibomots.plugin.adventure.configuration.configurations.AdventureConfig;
-import com.sibomots.plugin.adventure.configuration.configurations.GlobalConfig;
-import com.sibomots.plugin.adventure.core.DataStore;
-import org.spongepowered.api.Sponge;
+import com.sibomots.plugin.adventure.configuration.category.PlayerDataCategory;
+import ninja.leaping.configurate.objectmapping.Setting;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
+import java.util.UUID;
 
-public class ConfigurationManager {
+public class PlayerDataConfig extends PlayerDataCategory {
 
-    public static void loadConfig()
-    {
-        try {
-            Files.createDirectories(DataStore.dataLayerFolderPath);
+    private boolean requiresSave = true;
 
-            Path rootConfigPath = Sponge.getGame()
-                    .getSavesDirectory().resolve("config")
-                    .resolve(Adventure.MOD_ID);
-            DataStore.globalConfig =
-                    new AdventureConfig<GlobalConfig>(AdventureConfig.Type.GLOBAL, rootConfigPath.resolve("global.conf"));
+    @Setting(value = "uuid", comment = "The player's uuid.")
+    private String playerUniqueId;
 
-        }
-        catch(IOException e)
-        {
+    @Setting(value = "player-character-established", comment = "Is the player in Adventure")
+    private boolean isCharacterEstablished;
 
-        }
+
+    public String getPlayerUniqueId() {
+        return this.playerUniqueId;
     }
+
+    public void setPlayerInAdventure(boolean isInAdventure) {
+         this.isCharacterEstablished = isInAdventure;
+    }
+
+    public boolean getPlayerInAdventure() {
+        return this.isCharacterEstablished;
+    }
+
+    public void setPlayerUniqueId(UUID uuid) {
+        this.requiresSave = true;
+        this.playerUniqueId = uuid.toString();
+    }
+
+    public boolean requiresSave() {
+        return this.requiresSave;
+    }
+
+    public void setRequiresSave(boolean flag) {
+        this.requiresSave = flag;
+    }
+
+
 }

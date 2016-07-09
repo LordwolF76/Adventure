@@ -32,10 +32,13 @@
  */
 package com.sibomots.plugin.adventure.configuration.category;
 
+import ninja.leaping.configurate.objectmapping.Setting;
 import ninja.leaping.configurate.objectmapping.serialize.ConfigSerializable;
+import org.spongepowered.common.config.category.GeneralCategory;
 
 @ConfigSerializable
 public abstract class BasisCategory  {
+    @Setting
+    public GeneralCategory general = new GeneralCategory();
 
-    // TODO
 }
