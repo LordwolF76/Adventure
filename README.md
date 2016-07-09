@@ -10,6 +10,7 @@ It's inspired from my play with:
   * Traveller
   * Gamma World
   * Burning Wheel
+  * Lord of the Rings
 
 ## How to Build
 
@@ -83,4 +84,14 @@ This plugin can (and should) be used as a template for those who wish to try the
 A lot of the technical setup (gradle, source organization, etc..) can be taken from here to adapt to a new Plugin
 project. I'm using (trying to at least) the best practices that are promulgated by well known Sponge developers.  If
 there is a better way to do something, I'm all ears.
+
+
+## Trademarks and such
+
+Using the names of games, literature, etc.. is just nothing. Just names used in trival context.
+
+The names of trademarked things are owned and property of their respective trademark holders.
+
+
+
 
