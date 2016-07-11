@@ -32,7 +32,16 @@
  */
 package com.sibomots.plugin.adventure.core.game.character;
 
-public interface PlayableCharacter {
+import com.sibomots.plugin.adventure.configuration.configurations.PlayerDataConfig;
+import com.sibomots.plugin.adventure.core.CharacterStorageData;
 
+public interface PlayableCharacter {
     // TODO
+    public String getName();
+    public void saveAllData();
+    public CharacterStorageData getStorageData();
+    public void setPlayerInAdventure(boolean inAdventure);
+    public void setCharacterStorage(CharacterStorageData characterStorage);
+    public void setCharacterData(PlayerDataConfig playerDataConfig);
+    public void updateCharacterStorageData();
 }

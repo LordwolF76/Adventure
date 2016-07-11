@@ -40,6 +40,7 @@ import com.sibomots.plugin.adventure.configuration.configurations.AdventureConfi
 import com.sibomots.plugin.adventure.configuration.configurations.GlobalConfig;
 import com.sibomots.plugin.adventure.core.DataStore;
 import com.sibomots.plugin.adventure.core.SafeLogger;
+import com.sibomots.plugin.adventure.core.dss.FlatFileDataStore;
 import org.slf4j.Logger;
 import org.spongepowered.api.Game;
 import org.spongepowered.api.Sponge;
@@ -95,7 +96,6 @@ public class Adventure {
 
             // messages configuration
 
-
             Path rootConfigPath = Sponge.getGame()
                     .getSavesDirectory().resolve("config")
                     .resolve(Adventure.MOD_ID);
@@ -111,7 +111,13 @@ public class Adventure {
     @Listener
     public void onAboutToStart(GameAboutToStartServerEvent event) {
 
+        // TODO: Check the version of sponge
+
+
         // TODO: check the permissions plugin exists
+
+
+        // Set the instance (TODO: make this a singleton and NOT do this:)
         instance = this;
 
         this.loadConfig();
@@ -119,7 +125,9 @@ public class Adventure {
         if (this.dataStore == null)
         {
             try {
-                this.dataStore = null; //TODO new FlatFileDataStore();
+                this.dataStore = new FlatFileDataStore();
+                this.dataStore.initialize();
+
             }
             catch (Exception e)
             {

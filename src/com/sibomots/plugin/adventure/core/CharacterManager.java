@@ -51,7 +51,7 @@ public class CharacterManager {
     private AdventureConfig<?> activeConfig;
     private WorldProperties worldProperties;
     private Map<UUID, PlayerCharacter> playerDataList = Maps.newHashMap();
-    private Map<UUID, PlayerStorageData> playerStorageList = Maps.newHashMap();
+    private Map<UUID, CharacterStorageData> playerStorageList = Maps.newHashMap();
 
     public CharacterManager()
     {
@@ -91,16 +91,15 @@ public class CharacterManager {
             playerFilePath = rootPath.resolve(playerDataPath).resolve(playerUniqueId.toString());
         }
 
-        PlayerStorageData playerStorage =
-                new PlayerStorageData(playerFilePath,
-                        playerUniqueId, this.activeConfig.getConfig().general.isFoobar);
+        CharacterStorageData playerStorage =
+                new CharacterStorageData(playerFilePath, playerUniqueId);
 
         // TODO
         Object sampleInitialPlayerCharacterSheetInstance = null;
 
-        playerData = new PlayerCharacter(this.worldProperties,
-                        playerUniqueId, playerStorage, this.activeConfig,
-                        sampleInitialPlayerCharacterSheetInstance);
+        playerData = new PlayerCharacter( playerUniqueId, playerStorage,
+                this.activeConfig,
+                sampleInitialPlayerCharacterSheetInstance);
 
         this.playerStorageList.put(playerUniqueId, playerStorage);
         this.playerDataList.put(playerUniqueId, playerData);
@@ -113,7 +112,7 @@ public class CharacterManager {
     }
 
     public void save() {
-        for (PlayerStorageData storageData : this.playerStorageList.values()) {
+        for (CharacterStorageData storageData : this.playerStorageList.values()) {
             if (storageData != null) {
                 storageData.save();
             }

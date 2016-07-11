@@ -38,7 +38,6 @@ import com.sibomots.plugin.adventure.configuration.configurations.AdventureConfi
 import com.sibomots.plugin.adventure.configuration.configurations.GlobalConfig;
 import com.sibomots.plugin.adventure.core.game.character.PlayerCharacter;
 import org.spongepowered.api.Sponge;
-import org.spongepowered.api.world.storage.WorldProperties;
 
 import java.io.File;
 import java.nio.file.Path;
@@ -54,40 +53,64 @@ public class DataStore {
     public final Map<UUID, CharacterManager> characterManagers = Maps.newHashMap();
     protected CharacterManager globalCharacterManager;
 
-    public final static String GLOBAL_DATA_PATH = Adventure.MOD_ID + "Data";
     public final static Path dataLayerFolderPath = Paths.get("config").resolve(Adventure.MOD_ID);
-    public final static Path globalDataPath =
-            Paths.get(GLOBAL_DATA_PATH).resolve("GlobalPlayerData");
+    public final static Path globalDataPath = Paths.get("config").resolve(Adventure.MOD_ID).resolve("GlobalPlayerData");
 
     private static CharacterManager globalCharacterSheetManager;
 
 
-    public PlayerCharacter createCharacter(WorldProperties worldProp, UUID playerID )
+    public PlayerCharacter createCharacter(UUID playerID )
     {
-       CharacterManager characterManager = this.getCharacterManager(worldProp);
+       CharacterManager characterManager = this.getCharacterManager();
         return characterManager.createPlayerCharacterSheet(playerID);
     }
 
     @Nullable
-    public CharacterManager getCharacterManager(WorldProperties worldProperties)    {
+    public CharacterManager getCharacterManager()    {
             return this.globalCharacterManager;
     }
 
-    void initialize()
+    public void initialize()
     {
         this.globalCharacterSheetManager = new CharacterManager();
 
         DataStore.globalPlayerDataPath = Sponge.getGame()
                         .getSavesDirectory()
-                        .resolve(Sponge.getServer()
-                        .getDefaultWorldName())
                         .resolve(globalDataPath);
 
         File globalPlayerDataFolder = DataStore.globalPlayerDataPath.toFile();
         if (!globalPlayerDataFolder.exists()) {
             globalPlayerDataFolder.mkdirs();
         }
-
     }
+
+    // TODO
+    public void writeCharacterToStorage(PlayerCharacter character) {
+    }
+
+    // TODO
+    public void deleteCharacterFromSecondaryStorage(PlayerCharacter character) {
+    }
+
+
+    // TODO
+    public int getSchemaVersionFromStorage() {
+        int schemaVersion = -1;
+        return schemaVersion;
+    }
+
+    // TODO
+    public void updateSchemaVersionInStorage(int versionToSet) {
+    }
+
+    // TODO
+    public PlayerCharacter getPlayerDataFromStorage(UUID playerID) {
+        return null;
+    }
+
+    // TODO
+    public void overrideSavePlayerData(UUID playerID, PlayerCharacter playerData) {
+    }
+
 
 }

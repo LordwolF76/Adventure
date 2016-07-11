@@ -52,10 +52,11 @@ import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ForkJoinPool;
 
-public class PlayerStorageData {
+public class CharacterStorageData {
 
     public static final String HEADER = "someheader";
 
+    public Path filePath;
     private HoconConfigurationLoader loader;
     private CommentedConfigurationNode root = SimpleCommentedConfigurationNode.root(ConfigurationOptions.defaults()
     .setHeader(HEADER));
@@ -63,7 +64,7 @@ public class PlayerStorageData {
     private PlayerDataConfig configBase;
 
     @SuppressWarnings({"unchecked", "rawtypes"})
-    public PlayerStorageData(Path path, UUID playerUniqueId, boolean isFooBar) {
+    public CharacterStorageData(Path path, UUID playerUniqueId) {
 
         try {
             Files.createDirectories(path.getParent());

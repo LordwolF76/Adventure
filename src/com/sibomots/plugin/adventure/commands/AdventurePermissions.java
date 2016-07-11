@@ -65,7 +65,7 @@ public class AdventurePermissions {
     public static final String COMMAND_PLAYER_ALL
             = "adventure.player.all";
 
-    // Character generation commands:
+    // PlayerCharacter generation commands:
     //  Command for Player+ to make one self a character in the Adventure system
     public static final String COMMAND_MAKE_NEW_CHARCTER
             = "adventure.player.character.make.new";
