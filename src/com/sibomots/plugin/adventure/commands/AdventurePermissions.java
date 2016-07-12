@@ -38,28 +38,65 @@ package com.sibomots.plugin.adventure.commands;
  * public static final String COMMAND_NAME_OF_PERMISSION
  *          = "string representation of permission node";
  *
+ * In these permissions, there's the assumption that there are three tiers of permissions:
+ *
+ * Tier 1:  Tier 1 is the player rank (the non privledged rank).  Call it player, or member,
+ *          or whatever in your Permission system, to this plugin it's simply referred to as
+ *          the 'player' rank.
+ *
+ * Tier 2:  Tier 2 is the rank with privledges.  These privledges may be minor or as deep as
+ *          the "owner" of the game.  It makes no difference what you call them in your
+ *          permission system you've used.  For this plugin, the 'staff' rank in the permission
+ *          node just implies a level of access that is priviledged but not the Odin-almighty owner.
+ *
+ * Tier 3:  Tier 3 is the rank with all and any priviledges.  This is equivalent to the rank
+ *          that is given or assumed by the "owner" of the game, or at the least a rank where all the
+ *          trust is placed.   If your server has important staff deemed Admins and you want to restrict
+ *          just a portion of what this plugin would naturally recommend toving to Admins, then adjust
+ *          the permissions via your permissions system - but not here.
+ *
+ * Thus,  all the permission nodes are named by the recommended rank that would be likely to have
+ * that permision node.  If you wish to alter these recommendations, do so in your permissions system (plugin).
+ *
  */
 public class AdventurePermissions {
 
-    // Commands for EVERYONE
+    // Commands for ALL
+
+    // ANY AND ALL COMMANDS are acessed via  /adv COMMAND_SYNTAX
+
+    // TODO Insert grammar (PDF) for all commands
+
+
+    // The command to get the license of the plugin.
+    // Usage:  /adv license, /adv lic
     public static final String COMMAND_LICENSE
-            = "adventure.everyone.license";
+            = "adventure.all.license";
+
+    // The command to get help for the plugin.
+    // Usage: /adv help
     public static final String COMMAND_HELP
-            = "adventure.everyone.help";
+            = "adventure.all.help";
+
+    // The command to get information "about the plugin"
+    // Usage: /adv about
     public static final String COMMAND_ABOUT
-            = "adventure.everyone.about";
+            = "adventure.all.about";
 
     // Concept command has a <target>
     // <target> is a text string that may exist in the Concept glossary
+    // Usage:  /adv concept <target>
     public static final String COMMAND_CONCEPT
-            = "adventure.everyone.concept";
+            = "adventure.all.concept";
 
     // List all targets in the Concept glossary
+    // Usage:  /adv conceptlist
+
     public static final String COMMAND_CONCEPT_LIST
-            = "adventure.everyone.concept.list";
+            = "adventure.all.concept.list";
 
     // COMMANDS FOR PLAYER+
-    //  STAFF inherit all commands adventure.everyone.*
+    //  STAFF inherit all commands adventure.all.*
     //  Permission sysystem advice:  TO remove a specific command from Player
     //  then "subtract" that command from the Player rank.
     public static final String COMMAND_PLAYER_ALL
@@ -67,8 +104,29 @@ public class AdventurePermissions {
 
     // PlayerCharacter generation commands:
     //  Command for Player+ to make one self a character in the Adventure system
+    //
+    //  If a player of the game has not made a player character, then they would issue:
+    //
+    //   /adv make player
+    //
+    //  If the player already has a player character, then they need to use:
+    //
+    //  /adv cancel character
+    //
+    // There are limits:  A player can only make a new character once per day.
+    // After a new character is made, they may only cancel it within 2 weeks.
+    // (these limits are configurable)
+    //
+    // A new character can only be made three times.  After cancling the third character
+    // the player may not make new characters.
+    // (these limits are configurable)
+
     public static final String COMMAND_MAKE_NEW_CHARCTER
             = "adventure.player.character.make.new";
+
+    public static final String COMMAND_CANCEL_CHARCTER
+            = "adventure.player.character.cancel";
+
 
     //  Score commands:
     public static final String COMMAND_SCORE_SELF
@@ -76,7 +134,7 @@ public class AdventurePermissions {
 
 
     // COMMANDS FOR STAFF
-    //  STAFF inherit all commands adventure.everyone.*,  adventure.player.*
+    //  STAFF inherit all commands adventure.all.*,  adventure.player.*
     //  Permission sysystem advice:  TO remove a specific command from Staff
     //  then "subtract" that command from the Staff rank.
     public static final String COMMAND_STAFF_ALL
@@ -96,7 +154,7 @@ public class AdventurePermissions {
             = "adventure.staff.score.all";
 
     // COMMANDS FOR ADMIN+
-    //  ADMIN inherit all commands adventure.everyone.*,  adventure.player.*
+    //  ADMIN inherit all commands adventure.all.*,  adventure.player.*
     //  and adventure.staff.*
     //  Permission sysystem advice:  TO remove a specific command from Admin
     //  then "subtract" that command from the Admin rank.

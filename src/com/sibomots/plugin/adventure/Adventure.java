@@ -41,6 +41,7 @@ import com.sibomots.plugin.adventure.configuration.configurations.GlobalConfig;
 import com.sibomots.plugin.adventure.core.DataStore;
 import com.sibomots.plugin.adventure.core.SafeLogger;
 import com.sibomots.plugin.adventure.core.dss.FlatFileDataStore;
+import com.sibomots.plugin.adventure.core.exceptions.MissingPermissionPluginException;
 import org.slf4j.Logger;
 import org.spongepowered.api.Game;
 import org.spongepowered.api.Sponge;
@@ -52,6 +53,7 @@ import org.spongepowered.api.event.game.state.GameStartedServerEvent;
 import org.spongepowered.api.event.game.state.GameInitializationEvent;
 import org.spongepowered.api.plugin.Plugin;
 import org.spongepowered.api.plugin.PluginContainer;
+import org.spongepowered.api.service.permission.PermissionService;
 import org.spongepowered.api.text.Text;
 import org.spongepowered.api.world.DimensionType;
 import org.spongepowered.api.world.World;
@@ -67,7 +69,7 @@ public class Adventure {
 
     public static Adventure instance;
     public static final String MOD_ID = "Adventure";
-
+    public PermissionService permissionService = null;
     private static DataStore dataStore;
 
     @Inject public PluginContainer pluginContainer;
@@ -115,6 +117,12 @@ public class Adventure {
 
 
         // TODO: check the permissions plugin exists
+        this.permissionService = Sponge.getServiceManager().provide(PermissionService.class).get();
+        if (Sponge.getServiceManager().getRegistration(PermissionService.class).get().getPlugin().getId().equalsIgnoreCase("sponge")) {
+            SafeLogger.Error("Unable to initialize plugin. " + Adventure.MOD_ID + " requires a permissions plugin. PEX is recommended.",
+                    new MissingPermissionPluginException());
+            return;
+        }
 
 
         // Set the instance (TODO: make this a singleton and NOT do this:)
@@ -136,8 +144,8 @@ public class Adventure {
                 return;
             }
         }
-        //TODO Sponge.getGame().getEventManager().registerListeners(this, new PlayerEventHandler(dataStore, this));
-        //TODO Sponge.getGame().getEventManager().registerListeners(this, new WorldEventHandler());
+        Sponge.getGame().getEventManager().registerListeners(this, new PlayerEventHandler(dataStore, this));
+        Sponge.getGame().getEventManager().registerListeners(this, new WorldEventHandler());
         SafeLogger.Info("Finished loading data");
     }
 
